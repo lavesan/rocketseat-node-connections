@@ -1,4 +1,4 @@
-import { SpecificationRepository } from "../../repositories/implementations/SpecificationRepository";
+import { SpecificationRepository } from "@modules/cars/infra/typeorm/repositories/SpecificationRepository";
 import { injectable, inject } from "tsyringe";
 
 interface IRequest {

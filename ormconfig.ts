@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
-import { User } from "./src/modules/accounts/entities/User";
-import { Specification } from "./src/modules/cars/entities/Specification";
-import { Category } from "./src/modules/cars/entities/Category";
+import { User } from "./src/modules/accounts/infra/typeorm/entities/User";
+import { Specification } from "./src/modules/cars/infra/typeorm/entities/Specification";
+import { Category } from "./src/modules/cars/infra/typeorm/entities/Category";
 
 const AppDataSource = new DataSource({
   type: "postgres",
@@ -13,7 +13,7 @@ const AppDataSource = new DataSource({
   synchronize: true,
   logging: true,
   subscribers: [],
-  migrations: ["./src/database/migration/*.ts"],
+  migrations: ["./src/shared/infra/typeorm/migration/*.ts"],
   entities: [User, Specification, Category],
 });
 
