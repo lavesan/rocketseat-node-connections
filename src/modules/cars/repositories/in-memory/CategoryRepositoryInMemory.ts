@@ -1,5 +1,3 @@
-import { v4 as uuidV4 } from "uuid";
-
 import { Category } from "../../infra/typeorm/entities/Category";
 import {
   ICategoryRepository,
@@ -9,24 +7,26 @@ import {
 export class CategoryRepositoryInMemory implements ICategoryRepository {
   categories: Category[] = [];
 
-  findByName(name: string): Promise<Category> {
+  async findByName(name: string): Promise<Category> {
     const category = this.categories.find(
       (cat) => cat.name.toLowerCase() === name.toLowerCase()
     );
-    return Promise.resolve(category);
+    return category;
   }
 
-  list(): Promise<Category[]> {
-    return Promise.resolve(this.categories);
+  async list(): Promise<Category[]> {
+    return this.categories;
   }
 
-  create({ description, name }: ICreateCategoryDTO): Promise<void> {
-    this.categories.push({
-      id: uuidV4(),
+  async create({ description, name }: ICreateCategoryDTO): Promise<void> {
+    const category = new Category();
+
+    Object.assign(category, {
       name,
       description,
       created_at: new Date(),
     });
-    return Promise.resolve();
+
+    this.categories.push(category);
   }
 }
